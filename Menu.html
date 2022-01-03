@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        body{
+            background-color: black;
+        }
+        .data{
+            width: 80%;
+            height: 600px;
+            margin: auto;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            margin-top: 30px;
+            border: 20px;
+            background-color: white;
+        }
+        img{
+            height: 300px;
+            width: 300px;
+        }
+        p{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 20px;
+        }
+
+        button{
+            font-size: 30px;
+            background-color: red;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            margin-left: 40%;
+            margin-top:30px
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="data">
+        <button onclick="dish()">Show Availble Dishesh</button>
+        <div class="data2"></div>
+        <div  id="foodcard" ></div>
+
+        <button onclick="myclivk()" >check your order</button>
+
+    </div>
+</body>
+</html>
+<script>
+    var data2=[];
+    var datadiv = document.getElementById("data");
+   
+    async function dish(){
+        document.querySelector(".data2").innerHTML = ""
+        let response = await fetch ("https://www.themealdb.com/api/json/v1/1/random.php")
+        let data = await response.json();
+        data2 = data.meals;
+        console.log(data2)
+        showdish(data2)
+    }
+
+
+    var count = 0
+
+    function showdish(d){
+        
+
+        var datadiv = document.querySelector(".data")
+        var data2 = document.querySelector(".data2")
+        let image = document.createElement("img");
+        var p = document.createElement("p");
+        p.id = "p"
+        var price = document.createElement("p");
+        price.id = "price"
+        var addto = document.createElement("button")
+        addto.onclick = cart
+        addto.id = "btn"
+
+        addto.textContent = "Add to Cart"
+
+        let b =  Math.random()*1000
+        price.textContent ="Price - " + Math.ceil(b)
+        p.innerHTML = d[0].strMeal
+        image.src = d[0].strMealThumb;
+
+        data2.append(image,p,price,addto)
+        datadiv.append(data2)
+    }
+
+
+
+    function cart(d){
+        let oldItem = [];
+        oldItem= JSON.parse(localStorage.getItem('cartItems'));
+        if (oldItem==null) {
+            oldItem = [];
+        }
+
+        localStorage.setItem("cartItems", JSON.stringify([...oldItem,...data2]))
+       
+    }
+
+
+    function myclivk(){
+        window.location.href = "addcart.html"
+    }
+</script>

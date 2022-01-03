@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+</head>
+<style>
+    .nav{
+        width: 100%;
+        height: 80px;
+        background-color: rgb(200,50,89);
+        border-radius: 10px;
+    }
+    .box{
+        width: 30%;
+        height: 80px;
+        margin-left: 70%;
+        color: white;
+        display: flex;
+        justify-content: space-around;
+        
+    }
+
+
+
+</style>
+<body>
+
+    <div class="nav">
+        <div class="box">
+            <h1 onclick=" Menu()">Menu</h1>
+            <h1 onclick="login()">Login</h1>
+            <h1 onclick="signup()">Signup</h1>
+
+        </div>
+    </div>
+    
+</body>
+</html>
+<script>
+ 
+
+    function login(){
+        window.location.href="login.html"
+    }
+
+    function signup(){
+        window.location.href="signup.html"
+    }
+
+    function Menu(){
+        window.location.href="Menu.html"
+    }
+</script>

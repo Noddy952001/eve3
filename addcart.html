@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+      .data{
+            width: 80%;
+            height: 600px;
+            margin: auto;
+            border-radius: 30px;
+        }
+        img{
+            height: 300px;
+            width: 300px;
+        }
+        p{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 20px;
+        }
+
+        #btn{
+            font-size: 30px;
+            background-color: red;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+        }
+</style>
+<body>
+    <div class="data">
+        <div class="data2"></div>
+        <div  id="foodcard" ></div>
+
+    </div>
+</body>
+</html>
+
+<script>
+    dish();
+    var datadiv = document.getElementById("data");
+   
+    function dish(){
+        document.querySelector(".data2").innerHTML = ""
+        let response = JSON.parse(localStorage.getItem('cartItems'));
+        showdish(response)
+    }
+
+
+    function showdish(d){
+
+        for(var i=0; i<d.length; i++){
+            var datadiv = document.querySelector(".data")
+            var data2 = document.querySelector(".data2")
+            let image = document.createElement("img");
+            var p = document.createElement("p");
+            p.id = "p"
+            var price = document.createElement("p");
+            price.id = "price"
+
+            var remove = document.createElement("button")
+
+            let b =  Math.random()*1000
+            price.textContent ="Price - " + Math.ceil(b)
+            p.innerHTML = d[i].strMeal
+            image.src = d[i].strMealThumb;
+
+            data2.append(image,p,price)
+            datadiv.append(data2)
+        }
+
+        
+        var addto = document.createElement("button")
+        addto.id = "btn"
+        addto.onclick = checkout;
+        addto.textContent = "Checkout";
+        datadiv.append(addto)
+
+    }
+
+    
+function checkout(){
+    window.location.href = "checkout.html"
+}
+    
+</script>
